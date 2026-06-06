@@ -207,6 +207,11 @@ export const PROVIDER_MODELS = {
     { id: "minimax-m2.7", name: "MiniMax M2.7", targetFormat: "claude" },
     { id: "minimax-m2.5", name: "MiniMax M2.5", targetFormat: "claude" },
   ],
+  "opencode-zen": [  // OpenCode Zen free tier — multi-account pool via sk- API keys
+    { id: "minimax-m3-free", name: "MiniMax M3 (Free)" },
+    { id: "minimax-m2.7", name: "MiniMax M2.7" },
+    { id: "minimax-m2.5", name: "MiniMax M2.5" },
+  ],
   oc: [  // OpenCode
     // { id: "nemotron-3-super-free", name: "Nemotron 3 Super" },
     // { id: "qwen3.6-plus-free", name: "Qwen 3.6 Plus" },
@@ -899,6 +904,7 @@ const OAUTH_ALIASES = {
   kilocode: "kc",
   cline: "cl",
   opencode: "oc",
+  "opencode-zen": "ocz",
   qoder: "qd",
   vertex: "vertex",
   "vertex-partner": "vertex-partner",

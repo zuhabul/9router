@@ -371,6 +371,14 @@ export const PROVIDERS = {
     format: "openai",
     headers: {}
   },
+  // opencode-zen: multi-account MiniMax M3 pool via Zen API sk- keys.
+  // Requires User-Agent: curl/8.5.0 — Zen blocks all other UAs on the free tier.
+  // Add accounts via Dashboard → Providers → opencode-zen (API key auth).
+  "opencode-zen": {
+    baseUrl: "https://opencode.ai/zen/v1/chat/completions",
+    format: "openai",
+    headers: { "User-Agent": "curl/8.5.0" }
+  },
   "grok-web": {
     baseUrl: "https://grok.com/rest/app-chat/conversations/new",
     format: "grok-web",
