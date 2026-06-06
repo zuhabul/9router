@@ -606,6 +606,22 @@ async function testApiKeyConnection(connection, effectiveProxy = null) {
         const valid = res.status !== 401 && res.status !== 403;
         return { valid, error: valid ? null : "Invalid API key" };
       }
+      case "opencode-zen": {
+        // Zen free tier blocks non-curl User-Agents — must spoof curl/8.5.0.
+        // 429 = rate-limited but key is valid; only 401/403 = bad key.
+        const res = await fetchWithConnectionProxy("https://opencode.ai/zen/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "curl/8.5.0",
+            Authorization: `Bearer ${connection.apiKey}`,
+          },
+          body: JSON.stringify({ model: "minimax-m3-free", messages: [{ role: "user", content: "ping" }], max_tokens: 1, stream: false }),
+        }, effectiveProxy);
+        if (res.status === 429) return { valid: true, error: null };
+        const valid = res.status !== 401 && res.status !== 403;
+        return { valid, error: valid ? null : "Invalid API key" };
+      }
       case "xiaomi-mimo":
       case "xiaomi-tokenplan": {
         const baseUrls = { "xiaomi-mimo": "https://api.xiaomimimo.com/v1", "xiaomi-tokenplan": "https://token-plan-sgp.xiaomimimo.com/v1" };
